@@ -8,21 +8,18 @@ These instructions will get you a copy of the project up and running on your loc
 
 To install this app ensure you have
 
-```
-Android OS 4.0 API 14 (ICE CREAM SANDWICH) and above
 
-```
+* Android OS 4.0 API 14 (ICE CREAM SANDWICH) and above
+* Internet connectivity
+* atleast 1GB of disk space
+* and 250 MB of ram
 
 ### Installing
 
 To install the app visit the following link to download then click on install ensure you have enabled installation from unknown sources
 
-```
-Give the example
-Internet connectivity
-atleast 1GB of disk space
-and 250 MB of ram
-```
+* [Download Link](https://drive.google.com/file/d/1HZ4hXKTmktsaasYYNThomrJhcTHBsWtZ/view?usp=sharing)
+
 
 And repeat
 
