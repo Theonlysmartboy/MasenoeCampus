@@ -15,14 +15,12 @@ Android OS 4.0 API 14 (ICE CREAM SANDWICH) and above
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+To install the app visit the following link to download then click on install ensure you have enabled installation from unknown sources
 
 ```
 Give the example
 Internet connectivity
-atlest 1GB of disk space 
+atleast 1GB of disk space
 and 250 MB of ram
 ```
 
