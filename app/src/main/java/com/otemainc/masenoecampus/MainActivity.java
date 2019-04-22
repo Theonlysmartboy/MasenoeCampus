@@ -7,6 +7,9 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+
+import com.google.android.gms.ads.MobileAds;
+
 public class MainActivity extends AppCompatActivity {
 private WebView container;
 private ProgressBar progressBar;
@@ -31,6 +34,7 @@ private ProgressBar progressBar;
                 setTitle(view.getTitle());
             }
         });
+        MobileAds.initialize(this, "ca-app-pub-8916451669489221~4463415772");
     }
     public void onBackPressed(){
         if(container.canGoBack()){
