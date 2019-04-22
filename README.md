@@ -6,10 +6,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+To install this app ensure you have
 
 ```
-Give examples
+Android OS 4.0 API 14 (ICE CREAM SANDWICH) and above
+
 ```
 
 ### Installing
@@ -20,6 +21,9 @@ Say what the step will be
 
 ```
 Give the example
+Internet connectivity
+atlest 1GB of disk space 
+and 250 MB of ram
 ```
 
 And repeat
