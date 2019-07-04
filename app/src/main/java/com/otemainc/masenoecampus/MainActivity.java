@@ -24,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         container = findViewById(R.id.container);
         progressBar = findViewById(R.id.progressBar);
-        WebSettings mysettings = container.getSettings();
-        mysettings.setJavaScriptEnabled(true);
+        WebSettings Settings = container.getSettings();
+        Settings.setJavaScriptEnabled(true);
         container.loadUrl("https://elearning.maseno.ac.ke/");
         container.setWebViewClient(new WebViewClient(){
             @Override
