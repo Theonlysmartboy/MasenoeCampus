@@ -1,4 +1,5 @@
 package com.otemainc.masenoecampus;
+import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,9 +13,10 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
+@SuppressLint("SetJavaScriptEnabled")
 public class MainActivity extends AppCompatActivity {
-private WebView container;
-private ProgressBar progressBar;
+    private WebView container;
+    private ProgressBar progressBar;
     private AdView mAdView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
