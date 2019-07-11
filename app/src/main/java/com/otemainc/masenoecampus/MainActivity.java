@@ -1,9 +1,13 @@
 package com.otemainc.masenoecampus;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +15,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -27,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         container = findViewById(R.id.container);
         progressBar = findViewById(R.id.progressBar);
-        if (isNetworkAvailable()) {
+        if (!isNetworkAvailable()) {
         WebSettings Settings = container.getSettings();
         Settings.setJavaScriptEnabled(true);
         container.loadUrl("https://elearning.maseno.ac.ke/");
@@ -52,7 +57,25 @@ public class MainActivity extends AppCompatActivity {
         mAdView.loadAd(adRequest);
     }
         else{
-            
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+            alertDialogBuilder.setMessage("No internet connectivity found please check that wifi or cellular network is turned on and that you have active internet connection then try again");
+                    alertDialogBuilder.setPositiveButton("Ok",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface arg0, int arg1) {
+                                    progressBar.setVisibility(View.GONE);
+                                    startActivityForResult(new Intent(android.provider.Settings.ACTION_SETTINGS), 0);
+                                }
+                            });
+            alertDialogBuilder.setNegativeButton("Cancel",new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    finish();
+                }
+            });
+
+            AlertDialog alertDialog = alertDialogBuilder.create();
+            alertDialog.show();
         }
     }
     public void onBackPressed(){
