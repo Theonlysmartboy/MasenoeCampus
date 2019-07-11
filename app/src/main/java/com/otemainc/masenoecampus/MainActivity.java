@@ -1,7 +1,10 @@
 package com.otemainc.masenoecampus;
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.graphics.Bitmap;
-import android.support.v7.app.AppCompatActivity;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
@@ -24,16 +27,20 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         container = findViewById(R.id.container);
         progressBar = findViewById(R.id.progressBar);
+        if (isNetworkAvailable()) {
         WebSettings Settings = container.getSettings();
         Settings.setJavaScriptEnabled(true);
         container.loadUrl("https://elearning.maseno.ac.ke/");
-        container.setWebViewClient(new WebViewClient(){
+        container.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
-                super.onPageStarted(view, url, favicon); progressBar.setVisibility(View.VISIBLE);
+                super.onPageStarted(view, url, favicon);
+                progressBar.setVisibility(View.VISIBLE);
                 setTitle("Loading...");
             }
-            @Override public void onPageFinished(WebView view, String url) {
+
+            @Override
+            public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
                 progressBar.setVisibility(View.GONE);
                 setTitle(view.getTitle());
@@ -44,6 +51,10 @@ public class MainActivity extends AppCompatActivity {
         AdRequest adRequest = new AdRequest.Builder().build();
         mAdView.loadAd(adRequest);
     }
+        else{
+            
+        }
+    }
     public void onBackPressed(){
         if(container.canGoBack()){
             container.goBack();
@@ -51,5 +62,11 @@ public class MainActivity extends AppCompatActivity {
         else{
             super.onBackPressed();
         }
+    }
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
 }
