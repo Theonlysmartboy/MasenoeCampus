@@ -6,16 +6,15 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ProgressBar;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -32,11 +31,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         container = findViewById(R.id.container);
         progressBar = findViewById(R.id.progressBar);
-        if (!isNetworkAvailable()) {
-        WebSettings Settings = container.getSettings();
-        Settings.setJavaScriptEnabled(true);
-        container.loadUrl("https://elearning.maseno.ac.ke/");
-        container.setWebViewClient(new WebViewClient() {
+        ConnectivityManager cm = (ConnectivityManager)this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if( activeNetwork != null) {
+            WebSettings Settings = container.getSettings();
+            Settings.setJavaScriptEnabled(true);
+            container.loadUrl("https://elearning.maseno.ac.ke/");
+            container.setWebViewClient(new WebViewClient() {
             @Override
             public void onPageStarted(WebView view, String url, Bitmap favicon) {
                 super.onPageStarted(view, url, favicon);
@@ -49,13 +50,13 @@ public class MainActivity extends AppCompatActivity {
                 super.onPageFinished(view, url);
                 progressBar.setVisibility(View.GONE);
                 setTitle(view.getTitle());
-            }
-        });
-        MobileAds.initialize(this, "ca-app-pub-8916451669489221~4463415772");
-        mAdView = findViewById(R.id.adView);
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
-    }
+                }
+            });
+            MobileAds.initialize(this, "ca-app-pub-8916451669489221~4463415772");
+            mAdView = findViewById(R.id.adView);
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+         }
         else{
             AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
             alertDialogBuilder.setMessage("No internet connectivity found please check that wifi or cellular network is turned on and that you have active internet connection then try again");
@@ -73,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
                     finish();
                 }
             });
-
             AlertDialog alertDialog = alertDialogBuilder.create();
             alertDialog.show();
         }
@@ -86,10 +86,4 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
     }
-    private boolean isNetworkAvailable() {
-        ConnectivityManager connectivityManager
-                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
-    }
-}
+   }
